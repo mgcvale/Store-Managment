@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Main-Class: Main
 
+=======
+Manifest-Version: 1.0
+Main-Class: Main
+
+>>>>>>> d9528c8 (removed binary from root directory)
