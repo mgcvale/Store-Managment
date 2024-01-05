@@ -1,7 +1,6 @@
 package com.github.mgcvale.storemanagment.gui.crudpanels.read;
 
 import com.github.mgcvale.storemanagment.data.ItemSelectedListener;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -27,7 +26,7 @@ public class SearchPanel extends JPanel {
     GridBagConstraints gbc;
     ItemSelectedListener itemSelectedListener;
 
-    public SearchPanel(@NotNull HashMap<Integer, String[]> map){
+    public SearchPanel(HashMap<Integer, String[]> map){
         this.map = map;
         JPanel thisPanel = this;
         gbc = new GridBagConstraints();
