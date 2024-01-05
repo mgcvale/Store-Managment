@@ -22,7 +22,7 @@ public class SearchPanel extends JPanel {
     JComboBox sortBycb;
     JComboBox searchBycb;
     HashMap<Integer, String[]> map;
-    JTable entries;
+    JTable table;
     DefaultTableModel model;
     GridBagConstraints gbc;
     ItemSelectedListener itemSelectedListener;
@@ -37,7 +37,12 @@ public class SearchPanel extends JPanel {
         searchBtn = new JButton("Buscar");
         sortBycb = new JComboBox();
         searchBycb = new JComboBox();
-        model = new DefaultTableModel();
+        model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         //set up all the components
         sortBycb.addItem("Ordenar por: ID");
@@ -50,9 +55,9 @@ public class SearchPanel extends JPanel {
             model.addRow(new String[]{entry.getKey().toString(), entry.getValue()[0], entry.getValue()[4]});
             System.out.println(Arrays.toString(map.get(entry.getKey())));
         }
-        entries = new JTable(model);
-        entries.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        scrollPane = new JScrollPane(entries);
+        table = new JTable(model);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        scrollPane = new JScrollPane(table);
 
         //lay components out
         setLayout(new GridBagLayout());
@@ -112,11 +117,11 @@ public class SearchPanel extends JPanel {
             }
         });
 
-        entries.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                if(entries.getSelectedRow()>-1) {
-                    itemSelectedListener.itemSelected(Integer.parseInt((entries.getValueAt(entries.getSelectedRow(), 0)).toString()));
+                if(table.getSelectedRow()>-1) {
+                    itemSelectedListener.itemSelected(Integer.parseInt((table.getValueAt(table.getSelectedRow(), 0)).toString()));
                 }
             }
         });
@@ -137,7 +142,7 @@ public class SearchPanel extends JPanel {
                 }
             }
         }
-        entries.repaint();
+        table.repaint();
         scrollPane.repaint();
     }
     public void sort(){
@@ -156,6 +161,6 @@ public class SearchPanel extends JPanel {
         this.itemSelectedListener = itemSelectedListener;
     }
     public int getSelectedItemID(){
-        return entries.getSelectedRow()+1;
+        return table.getSelectedRow()+1;
     }
 }

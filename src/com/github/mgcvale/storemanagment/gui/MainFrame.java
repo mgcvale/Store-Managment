@@ -29,6 +29,7 @@ public class MainFrame extends JFrame implements HashMapChangeListener {
     JsonHandler jsonHandler = new JsonHandler();
 
     public MainFrame(){
+        super("Store managment");
         //init variables
         setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
